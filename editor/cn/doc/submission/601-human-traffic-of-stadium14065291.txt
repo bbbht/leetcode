@@ -1,0 +1,83 @@
+--
+-- @lc app=leetcode.cn id=601 lang=mysql
+--
+-- [601] 体育馆的人流量
+--
+-- https://leetcode-cn.com/problems/human-traffic-of-stadium/description/
+--
+-- database
+-- Hard (37.43%)
+-- Total Accepted:    3.1K
+-- Total Submissions: 8.2K
+-- Testcase Example:  '{"headers": {"stadium": ["id", "visit_date", "people"]}, "rows": {"stadium": [[1, "2017-01-01", 10], [2, "2017-01-02", 109], [3, "2017-01-03", 150], [4, "2017-01-04", 99], [5, "2017-01-05", 145], [6, "2017-01-06", 1455], [7, "2017-01-07", 199], [8, "2017-01-08", 188]]}}'
+--
+-- X 市建了一个新的体育馆，每日人流量信息被记录在这三列信息中：序号 (id)、日期 (date)、 人流量 (people)。
+--
+-- 请编写一个查询语句，找出高峰期时段，要求连续三天及以上，并且每天人流量均不少于100。
+--
+-- 例如，表 stadium：
+--
+-- +------+------------+-----------+
+-- | id   | date       | people    |
+-- +------+------------+-----------+
+-- | 1    | 2017-01-01 | 10        |
+-- | 2    | 2017-01-02 | 109       |
+-- | 3    | 2017-01-03 | 150       |
+-- | 4    | 2017-01-04 | 99        |
+-- | 5    | 2017-01-05 | 145       |
+-- | 6    | 2017-01-06 | 1455      |
+-- | 7    | 2017-01-07 | 199       |
+-- | 8    | 2017-01-08 | 188       |
+-- +------+------------+-----------+
+--
+--
+-- 对于上面的示例数据，输出为：
+--
+-- +------+------------+-----------+
+-- | id   | date       | people    |
+-- +------+------------+-----------+
+-- | 5    | 2017-01-05 | 145       |
+-- | 6    | 2017-01-06 | 1455      |
+-- | 7    | 2017-01-07 | 199       |
+-- | 8    | 2017-01-08 | 188       |
+-- +------+------------+-----------+
+--
+--
+-- Note:
+-- 每天只有一行记录，日期随着 id 的增加而增加。
+--
+--
+# Write your MySQL query statement below
+SELECT DISTINCT
+	s3.*
+FROM
+	stadium AS s3,
+	(
+SELECT
+	id
+FROM
+	(
+SELECT
+	@i :=
+IF
+	( s.`people` >= 100, @i + 1, 0 ),
+IF
+	( @i > 2, s.`people`, NULL ) AS `people`,
+	s.id AS id
+FROM
+	`stadium` AS s,
+	( SELECT @i := 0 ) AS tmp
+ORDER BY
+	s.id ASC
+	) AS s2
+WHERE
+	people IS NOT NULL
+	) AS s4
+WHERE
+	s4.id = s3.id + 1
+	OR s4.id = s3.id + 2
+	OR s4.id = s3.id
+
+
+#runtime:299 ms
+#memory:N/A
