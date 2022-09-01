@@ -1,0 +1,9 @@
+# Write your MySQL query statement below
+DELETE p1 
+FROM
+	Person AS p1
+	LEFT JOIN ( SELECT min( Id ) AS Id, Email FROM Person GROUP BY Email ) AS p2 ON p1.Id = P2.Id 
+WHERE
+	p2.Id IS NULL
+#runtime:1011 ms
+#memory:N/A

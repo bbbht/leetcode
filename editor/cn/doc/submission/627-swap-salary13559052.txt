@@ -1,0 +1,4 @@
+# Write your MySQL query statement below
+select id, name, if(sex = 'm','f','m') sex,salary from salary;
+#runtime:205 ms
+#memory:N/A
