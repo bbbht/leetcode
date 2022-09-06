@@ -18,3 +18,13 @@ func main() {
 
 }
 ```
+
+## 总结
+### 二分查找
+#### 右边界的选择
+1. 如果 `right` 初始化为 `len(nums)`(数组长度)，
+	1. 循环的判断条件为 `left < right`
+	2. 循环中 `right` 的赋值表达式为 `right = mid`
+2. 如果 `right` 初始化为 `len(nums) - 1`(索引最大值)
+	1. 循环的判断条件为 `left <= right`
+	2. 循环中 `right` 的赋值表达式为 `right = mid - 1`
