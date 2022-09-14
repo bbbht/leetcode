@@ -1,0 +1,33 @@
+func largestRectangleArea(heights []int) int {
+	heights = append(heights, 0)
+	res, stack := 0, make([]int, 0, len(heights)/8+1)
+
+	for i := range heights {
+		for len(stack) > 0 && heights[stack[len(stack)-1]] >= heights[i] {
+			height := heights[stack[len(stack)-1]]
+			stack = stack[:len(stack)-1]
+
+			width := i
+			if len(stack) > 0 {
+				width = i - stack[len(stack)-1] - 1
+			}
+
+			res = max84(res, height*width)
+		}
+
+		stack = append(stack, i)
+	}
+
+	return res
+}
+
+func max84(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+
+//runtime:104 ms
+//memory:7.7 MB
