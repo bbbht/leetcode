@@ -38,3 +38,43 @@ func printNode(node *ListNode) {
 	}
 	fmt.Println()
 }
+
+// 位图
+type bitMap struct {
+	bits []byte
+	cap  int
+}
+
+func newBitMap(cap int) *bitMap {
+	bits := make([]byte, (cap>>3)+1)
+	return &bitMap{bits: bits, cap: cap}
+}
+
+func (b *bitMap) add(num uint) {
+	b.bits[num >> 3] |= 1 << (num & 0x07)
+}
+
+func (b *bitMap) isExist(num uint) bool {
+	return b.bits[num >> 3]&(1<<(num & 0x07)) != 0
+}
+
+func (b *bitMap) remove(num uint) {
+	b.bits[num >> 3] &= ^(1 << (num & 0x07))
+}
+
+func main()  {
+	printNode(test1(createNode(8)))
+}
+
+// 整个反转
+func test1(head *ListNode) *ListNode {
+	var pre, next *ListNode
+	for head != nil {
+		next = head.Next
+		head.Next = pre
+		pre = head
+		head = next
+	}
+
+	return pre
+}
