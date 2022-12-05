@@ -62,9 +62,9 @@ func (b *bitMap) remove(num uint) {
 	b.bits[num >> 3] &= ^(1 << (num & 0x07))
 }
 
-func main()  {
-	printNode(test1(createNode(8)))
-}
+// func main()  {
+// 	printNode(test1(createNode(8)))
+// }
 
 // 整个反转
 func test1(head *ListNode) *ListNode {
