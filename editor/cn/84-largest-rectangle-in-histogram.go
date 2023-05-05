@@ -40,5 +40,6 @@ func max84(a, b int) int {
 // leetcode submit region end(Prohibit modification and deletion)
 
 func main() {
-
+	// largestRectangleArea([]int{2, 1, 5, 6, 2, 15, 3})
+	largestRectangleArea([]int{1, 2, 1, 2, 1})
 }

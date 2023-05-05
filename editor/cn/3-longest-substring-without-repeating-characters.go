@@ -4,26 +4,26 @@ package main
 
 // leetcode submit region begin(Prohibit modification and deletion)
 func lengthOfLongestSubstring(s string) int {
-	l, ml := len(s), 0
+	size, ml := len(s), 0
 	m := make(map[uint8]int, 52)
 
-	for i, j := 0, 0; j < l; j++ {
+	for left, right := 0, 0; right < size; right++ {
 		// 只使用 ASCII 码即可
-		v := s[j]
-		// k >= i 如果是当前窗口之外的字符，不需要考虑
-		if k, ok := m[v]; ok && k >= i {
+		val := s[right]
+		// index >= left 如果是当前窗口之外的字符，不需要考虑
+		if index, ok := m[val]; ok && index >= left {
 			// 字符已存在，则直接跳过它后面
-			i = k + 1
+			left = index + 1
 		}
 
 		// 无论是否存在，存入当前字符及位置
-		m[v] = j
+		m[val] = right
 
 		// 最大长度判断
-		ml = max3(ml, j+1-i)
+		ml = max3(ml, right+1-left)
 
 		// 剩下的就没必要判断了
-		if l-i <= ml {
+		if size-left <= ml {
 			break
 		}
 	}

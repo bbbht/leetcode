@@ -9,6 +9,12 @@ type ListNode struct {
 	Next *ListNode
 }
 
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 func createNode(n int) *ListNode {
 	head := &ListNode{}
 	node := head
@@ -51,15 +57,15 @@ func newBitMap(cap int) *bitMap {
 }
 
 func (b *bitMap) add(num uint) {
-	b.bits[num >> 3] |= 1 << (num & 0x07)
+	b.bits[num>>3] |= 1 << (num & 0x07)
 }
 
 func (b *bitMap) isExist(num uint) bool {
-	return b.bits[num >> 3]&(1<<(num & 0x07)) != 0
+	return b.bits[num>>3]&(1<<(num&0x07)) != 0
 }
 
 func (b *bitMap) remove(num uint) {
-	b.bits[num >> 3] &= ^(1 << (num & 0x07))
+	b.bits[num>>3] &= ^(1 << (num & 0x07))
 }
 
 // func main()  {

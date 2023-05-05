@@ -57,6 +57,7 @@ func min(a, b int) int {
 
 	return a
 }
+
 // func main()  {
 // 	fmt.Println(findMedianSortedArrays([]int{}, []int{1}))
 // }

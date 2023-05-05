@@ -16,18 +16,18 @@ func longestCommonPrefix(strs []string) string {
 		}
 	}
 
-	// r为上限，l 跳增，r 尽量递减
-	mid, l, r := 0, 0, maxLen
-	for r > 0 && l < r {
-		mid = (l + r + 1) / 2
+	// r为上限，left 跳增，right 尽量递减
+	mid, left, right := 0, 0, maxLen
+	for right > 0 && left < right {
+		mid = (left + right + 1) / 2
 		if checkLongest(mid, strs) {
-			l = mid
+			left = mid
 		} else {
-			r = mid-1
+			right = mid - 1
 		}
 	}
 
-	return strs[0][0:l]
+	return strs[0][0:left]
 }
 
 func checkLongest(lp int, strs []string) bool {
@@ -39,6 +39,7 @@ func checkLongest(lp int, strs []string) bool {
 	}
 	return true
 }
+
 // func main()  {
 // 	fmt.Println(longestCommonPrefix([]string{"floflower", "floflow", "flofloight"}))
 // }
