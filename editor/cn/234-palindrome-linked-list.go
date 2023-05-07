@@ -24,6 +24,7 @@ func isPalindrome(head *ListNode) bool {
 		slow = next
 	}
 
+	// 链表总数为奇数，需要在后移动跃过中点达到对称
 	if fast != nil && fast.Next == nil {
 		slow = slow.Next
 	}
